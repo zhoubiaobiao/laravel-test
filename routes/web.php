@@ -29,8 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware([/*'auth', */'permission'])->group(function () {
+Route::middleware(['auth', 'permission'])->group(function () {
     Route::get('/dev', [DevController::class, 'index'])->name('dev.index');
+    Route::get('/excute', [DevController::class, 'excute'])->name('dev.excute');
 });
 
 require __DIR__.'/auth.php';

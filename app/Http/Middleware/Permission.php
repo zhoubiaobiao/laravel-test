@@ -22,13 +22,11 @@ class Permission
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
-
-        if ( ! $user instanceof User) {
+        if ( ! $request->user() instanceof User) {
             return redirect(RouteServiceProvider::LOGIN);
         }
 
-        if ($user->role !== 'admin') {
+        if ($request->user()->role !== 'admin') {
             abort(403);
         }
 
