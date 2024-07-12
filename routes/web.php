@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'permission'])->group(function () {
     Route::get('/dev', [DevController::class, 'index'])->name('dev.index');
     Route::get('/excute', [DevController::class, 'excute'])->name('dev.excute');
+    Route::get('/export', [DevController::class, 'export'])->name('dev.export');
 });
 
 require __DIR__.'/auth.php';

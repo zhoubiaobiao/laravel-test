@@ -9,26 +9,8 @@
         <table class="layui-hide" id="test" lay-filter="test"></table>
     </div>
 
-{{--    <table id="myTable" class="display">--}}
-{{--        <thead>--}}
-{{--        <tr>--}}
-{{--            <th>Name</th>--}}
-{{--            <th>Email</th>--}}
-{{--            <th>Role</th>--}}
-{{--            <th>Create</th>--}}
-{{--            <th>Update</th>--}}
-{{--        </tr>--}}
-{{--        </thead>--}}
-{{--        <tbody>--}}
-{{--        </tbody>--}}
-{{--    </table>--}}
     <script src="//cdn.staticfile.net/layui/2.9.14/layui.js"></script>
     <script>
-        // $(function() {
-        //     $("#myTable").DataTable({
-        //         ajax: '/excute',
-        //     });
-        // });
         layui.use(['table', 'dropdown'], function(){
             var table = layui.table;
 
@@ -50,6 +32,7 @@
                 parseData:function(res) {
                     if (res.code == 1) {
                         layer.alert(res.error);
+                        res.msg = res.error
                     }
                     return res;
                 },
@@ -66,34 +49,6 @@
                 },
                 error: function(res, msg){
                     console.log(res, msg)
-                }
-            });
-
-            // 工具栏事件
-            table.on('toolbar(test)', function(obj){
-                var id = obj.config.id;
-                var checkStatus = table.checkStatus(id);
-                var othis = lay(this);
-                switch(obj.event){
-                    case 'getCheckData':
-                        var data = checkStatus.data;
-                        layer.alert(layui.util.escape(JSON.stringify(data)));
-                        break;
-                    case 'getData':
-                        var getData = table.getData(id);
-                        console.log(getData);
-                        layer.alert(layui.util.escape(JSON.stringify(getData)));
-                        break;
-                };
-            });
-            // 表头自定义元素工具事件 --- 2.8.8+
-            table.on('colTool(test)', function(obj){
-                var event = obj.event;
-                console.log(obj);
-                if(event === 'email-tips'){
-                    layer.alert(layui.util.escape(JSON.stringify(obj.col)), {
-                        title: '当前列属性配置项'
-                    });
                 }
             });
         });
